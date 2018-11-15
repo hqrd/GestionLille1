@@ -1,19 +1,21 @@
-package com.tac.hqrd.gestionlille1.ui.main
+package com.tac.hqrd.gestionlille1.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
 import kotlinx.android.synthetic.main.list_fragment.*
 import java.util.logging.Logger
 
+
 class ListFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: ListIssuesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,16 +26,21 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
+        viewModel.getIssues()
 
         val navFrament = findNavController()
         button2.setOnClickListener { _ ->
-            navFrament.navigate(R.id.action_to_addFragment)
+            Logger.getLogger(javaClass.toString()).info("VM = ${viewModel}")
         }
 
         val test = ListFragmentArgs.fromBundle(arguments).test
         Logger.getLogger(javaClass.toString()).info("TEST = $test")
+
+        viewModel.getElapsedTime().observe(this, Observer { timer ->
+            message.text = timer.toString()
+            Logger.getLogger(javaClass.toString()).info("Updating timer")
+        })
     }
 
 }
