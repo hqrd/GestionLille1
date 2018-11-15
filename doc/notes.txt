@@ -1,0 +1,6 @@
+Hello jetpack : https://developer.android.com/jetpack/docs/getting-started
+
+Kotlin : https://kotlinlang.org/docs/reference/idioms.html
+Keddit : https://android.jlelse.eu/learn-kotlin-while-developing-an-android-app-part-2-e53317ffcbe9
+
+Navigation : https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing

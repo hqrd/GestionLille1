@@ -1,21 +1,17 @@
 package com.tac.hqrd.gestionlille1.ui.main
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tac.hqrd.gestionlille1.MainActivity.Companion.addFragmentFromFragment
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
 import kotlinx.android.synthetic.main.list_fragment.*
 import java.util.logging.Logger
 
 class ListFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ListFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
 
@@ -31,19 +27,13 @@ class ListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
 
+        val navFrament = findNavController()
         button2.setOnClickListener { _ ->
-            fragmentManager?.let { fragmentManager ->
-                addFragmentFromFragment(
-                    fragmentManager,
-                    AddFragment.newInstance(),
-                    this
-                )
-            }
+            navFrament.navigate(R.id.action_listFragment_to_addFragment)
         }
+
+        val test = ListFragmentArgs.fromBundle(arguments).test
+        Logger.getLogger(javaClass.toString()).info("TEST = $test")
     }
 
-    override fun onResume() {
-        super.onResume()
-        Logger.getLogger(javaClass.toString()).info("RESUME")
-    }
 }
