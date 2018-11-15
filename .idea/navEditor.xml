@@ -45,12 +45,6 @@
                   <entry key="addFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="430" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_to_listFragment">
@@ -66,12 +60,6 @@
                   <entry key="listFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="177" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_to_addFragment">
@@ -80,18 +68,6 @@
                               </value>
                             </entry>
                           </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="mainActivity2">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-44" />
-                            <option name="y" value="-23" />
-                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
