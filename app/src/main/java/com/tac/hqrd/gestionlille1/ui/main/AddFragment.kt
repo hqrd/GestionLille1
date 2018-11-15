@@ -29,7 +29,7 @@ class AddFragment : Fragment() {
         val navFrament = findNavController()
         button.setOnClickListener { _ ->
             val testString = "alo"
-            val action = AddFragmentDirections.actionAddFragmentToListFragment()
+            val action = AddFragmentDirections.actionToListFragment()
             action.setTest(testString)
             navFrament.navigate(action)
         }

@@ -29,7 +29,7 @@ class ListFragment : Fragment() {
 
         val navFrament = findNavController()
         button2.setOnClickListener { _ ->
-            navFrament.navigate(R.id.action_listFragment_to_addFragment)
+            navFrament.navigate(R.id.action_to_addFragment)
         }
 
         val test = ListFragmentArgs.fromBundle(arguments).test
