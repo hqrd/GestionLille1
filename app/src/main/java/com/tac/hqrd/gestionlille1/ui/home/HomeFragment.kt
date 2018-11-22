@@ -1,4 +1,4 @@
-package com.tac.hqrd.gestionlille1.ui.list
+package com.tac.hqrd.gestionlille1.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
-import kotlinx.android.synthetic.main.list_fragment.*
+import com.tac.hqrd.gestionlille1.ui.list.ListIssuesViewModel
+import kotlinx.android.synthetic.main.home_fragment.*
 import java.util.logging.Logger
 
-
-class ListFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var viewModel: ListIssuesViewModel
 
@@ -21,7 +21,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.list_fragment, container, false)
+        return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -30,18 +30,18 @@ class ListFragment : Fragment() {
             ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val navFrament = findNavController()
-        button2.setOnClickListener { _ ->
-            Logger.getLogger(javaClass.toString()).info("VM = ${viewModel}")
-        }
-
-        val test = ListFragmentArgs.fromBundle(arguments).test
-        Logger.getLogger(javaClass.toString()).info("TEST = $test")
-
         viewModel.getElapsedTime().observe(this, Observer { timer ->
-            message.text = timer.toString()
+            messageHome.text = timer.toString()
             Logger.getLogger(javaClass.toString()).info("Updating timer")
         })
+
+        val navFrament = findNavController()
+        buttonAdd.setOnClickListener { _ ->
+            val action = HomeFragmentDirections.actionHomeFragmentToAddFragment()
+            navFrament.navigate(action)
+        }
+
+
     }
 
 }

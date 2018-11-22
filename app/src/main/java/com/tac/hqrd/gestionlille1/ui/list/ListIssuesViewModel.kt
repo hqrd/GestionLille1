@@ -10,23 +10,19 @@ import java.util.*
 
 class ListIssuesViewModel : ViewModel() {
     private lateinit var issues: MutableLiveData<List<Issue>>
-    private val mElapsedTime = MutableLiveData<Long>()
-    private var mInitialTime: Long = SystemClock.elapsedRealtime();
+    private lateinit var mElapsedTime: MutableLiveData<Long>
+    private var mInitialTime: Long = SystemClock.elapsedRealtime()
     private val ONE_SECOND: Long = 1000
 
     init {
         mInitialTime = SystemClock.elapsedRealtime()
-        val timer = Timer()
-        timer.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {// setValue() cannot be called from a background thread so postValue is used.// Update the elapsed time every second.
-                val newValue = (SystemClock.elapsedRealtime() - mInitialTime) / 1000
-                // setValue() cannot be called from a background thread so postValue is used.
-                mElapsedTime.postValue(newValue)
-            }
-        }, ONE_SECOND, ONE_SECOND)
     }
 
     fun getElapsedTime(): LiveData<Long> {
+        if (!::mElapsedTime.isInitialized) {
+            mElapsedTime = MutableLiveData()
+            startTimer()
+        }
         return mElapsedTime
     }
 
@@ -36,6 +32,18 @@ class ListIssuesViewModel : ViewModel() {
             loadIssues()
         }
         return issues
+    }
+
+    private fun startTimer() {
+        mElapsedTime.postValue((SystemClock.elapsedRealtime() - mInitialTime) / 1000)
+        val timer = Timer()
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {// setValue() cannot be called from a background thread so postValue is used.// Update the elapsed time every second.
+                val newValue = (SystemClock.elapsedRealtime() - mInitialTime) / 1000
+                // setValue() cannot be called from a background thread so postValue is used.
+                mElapsedTime.postValue(newValue)
+            }
+        }, ONE_SECOND, ONE_SECOND)
     }
 
     private fun loadIssues() {

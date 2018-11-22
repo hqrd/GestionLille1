@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/addFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/addFragment"
@@ -22,16 +22,22 @@
         android:name="com.tac.hqrd.gestionlille1.ui.list.ListFragment"
         android:label="list_fragment"
         tools:layout="@layout/list_fragment">
+        <argument
+            android:name="test"
+            android:defaultValue="Oskour"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.tac.hqrd.gestionlille1.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment">
         <action
-            android:id="@+id/action_to_addFragment"
+            android:id="@+id/action_homeFragment_to_addFragment"
             app:destination="@id/addFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <argument
-            android:name="test"
-            android:defaultValue="Oskour"
-            app:argType="string" />
     </fragment>
 </navigation>
