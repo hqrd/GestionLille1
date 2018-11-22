@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
-import com.tac.hqrd.gestionlille1.ui.list.ListIssuesViewModel
+import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.android.synthetic.main.add_fragment.*
 
 class AddFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.tac.hqrd.gestionlille1.ui.list
+package com.tac.hqrd.gestionlille1.viewmodel
 
 import android.os.SystemClock
 import androidx.lifecycle.LiveData
@@ -8,23 +8,17 @@ import com.tac.hqrd.gestionlille1.model.Issue
 import java.util.*
 
 
-class ListIssuesViewModel : ViewModel() {
-    private lateinit var issues: MutableLiveData<List<Issue>>
-    private lateinit var mElapsedTime: MutableLiveData<Long>
+class ListIssuesViewModel() : ViewModel() {
+    lateinit var issues: MutableLiveData<List<Issue>>
+    var elapsedtime = MutableLiveData<String>()
     private var mInitialTime: Long = SystemClock.elapsedRealtime()
     private val ONE_SECOND: Long = 1000
 
     init {
         mInitialTime = SystemClock.elapsedRealtime()
+        startTimer()
     }
 
-    fun getElapsedTime(): LiveData<Long> {
-        if (!::mElapsedTime.isInitialized) {
-            mElapsedTime = MutableLiveData()
-            startTimer()
-        }
-        return mElapsedTime
-    }
 
     fun getIssues(): LiveData<List<Issue>> {
         if (!::issues.isInitialized) {
@@ -35,13 +29,13 @@ class ListIssuesViewModel : ViewModel() {
     }
 
     private fun startTimer() {
-        mElapsedTime.postValue((SystemClock.elapsedRealtime() - mInitialTime) / 1000)
+        elapsedtime.postValue(((SystemClock.elapsedRealtime() - mInitialTime) / 1000).toString())
         val timer = Timer()
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {// setValue() cannot be called from a background thread so postValue is used.// Update the elapsed time every second.
                 val newValue = (SystemClock.elapsedRealtime() - mInitialTime) / 1000
                 // setValue() cannot be called from a background thread so postValue is used.
-                mElapsedTime.postValue(newValue)
+                elapsedtime.postValue(newValue.toString())
             }
         }, ONE_SECOND, ONE_SECOND)
     }
@@ -53,7 +47,7 @@ class ListIssuesViewModel : ViewModel() {
     }
 
     override fun toString(): String {
-        return "ListIssuesViewModel(issues=${issues.value}, mElapsedTime=${mElapsedTime.value}, mInitialTime=$mInitialTime, ONE_SECOND=$ONE_SECOND)"
+        return "ListIssuesViewModel(issues=${issues.value}, elapsedtime=${elapsedtime.value}, mInitialTime=$mInitialTime, ONE_SECOND=$ONE_SECOND)"
     }
 
 

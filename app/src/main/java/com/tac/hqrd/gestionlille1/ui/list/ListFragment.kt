@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
+import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.android.synthetic.main.list_fragment.*
 import java.util.logging.Logger
 
@@ -38,7 +39,7 @@ class ListFragment : Fragment() {
         val test = ListFragmentArgs.fromBundle(arguments).test
         Logger.getLogger(javaClass.toString()).info("TEST = $test")
 
-        viewModel.getElapsedTime().observe(this, Observer { timer ->
+        viewModel.elapsedtime.observe(this, Observer { timer ->
             message.text = timer.toString()
             Logger.getLogger(javaClass.toString()).info("Updating timer")
         })
