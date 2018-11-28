@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
 import com.tac.hqrd.gestionlille1.databinding.HomeFragmentBinding
 import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
-import java.util.logging.Logger
 
 
 class HomeFragment : Fragment() {
@@ -38,12 +36,6 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-
-        viewModel.elapsedtime.observe(this, Observer { timer ->
-            messageHome.text = timer.toString()
-            Logger.getLogger(javaClass.toString()).info("Updating timer")
-        })
 
         val navFrament = findNavController()
         buttonAdd.setOnClickListener { _ ->

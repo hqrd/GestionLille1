@@ -14,3 +14,7 @@ https://developer.android.com/kotlin/ktx
 Permissions : https://developer.android.com/guide/topics/permissions/overview
 
 Adapter list :https://developer.android.com/guide/topics/ui/declaring-layout#kotlin
+
+
+Play Store :
+https://support.google.com/googleplay/android-developer/answer/7384423
