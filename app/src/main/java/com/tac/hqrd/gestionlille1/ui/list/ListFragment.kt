@@ -20,16 +20,19 @@ class ListFragment : Fragment() {
     private lateinit var viewModel: ListIssuesViewModel
     private lateinit var binding: ListFragmentBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
-
-        viewModel = activity?.run {
-            ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
-        } ?: throw Exception("Invalid Activity")
 
         binding.viewmodel = viewModel
 
@@ -38,6 +41,7 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
 
         val navFrament = findNavController()
         button2.setOnClickListener { _ ->

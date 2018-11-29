@@ -1,39 +1,45 @@
 package com.tac.hqrd.gestionlille1.viewmodel
 
-import androidx.lifecycle.ViewModel
-import com.tac.hqrd.gestionlille1.model.Issue
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import com.tac.hqrd.gestionlille1.IssueRepository
+import com.tac.hqrd.gestionlille1.db.entity.Issue
 import kotlin.random.Random
 
 
-class ListIssuesViewModel() : ViewModel() {
-    var issues: ArrayList<Issue> = ArrayList()
+class ListIssuesViewModel(application: Application) : AndroidViewModel(application) {
+    private val issueRepository: IssueRepository
+    internal val issues: LiveData<List<Issue>>
+
     var numberIssues: String = "0"
 
     init {
-        loadIssues()
+        issueRepository = IssueRepository(application)
+        issues = issueRepository.getAllIssues()
+        updateNumberIssues()
+    }
+
+    fun insert(issue: Issue) {
+        issueRepository.insert(issue)
     }
 
     fun addIssue() {
-        issues.add(
+        this.insert(
             Issue(
-                numberIssues.toLong(), "Autre", Random.nextFloat()
-                , Random.nextFloat()
+                "Autre", Random.nextFloat(), Random.nextFloat()
             )
         )
         updateNumberIssues()
     }
 
-    fun loadIssues() {
-        issues = ArrayList(listOf(Issue(1, "Autre", 10F, 15F), Issue(2, "Détritus", 12F, 10F)))
-        updateNumberIssues()
-    }
 
     private fun updateNumberIssues() {
-        numberIssues = issues.size.toString()
+        numberIssues = if (issues.value?.size.toString() != "null") issues.value?.size.toString() else "0"
     }
 
     override fun toString(): String {
-        return "ListIssuesViewModel(issues=$issues, numberIssues='$numberIssues')"
+        return "ListIssuesViewModel(issues=${issues.value}, numberIssues='$numberIssues')"
     }
 
 }

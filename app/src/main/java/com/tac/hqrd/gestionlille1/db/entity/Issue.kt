@@ -1,15 +1,16 @@
-package com.tac.hqrd.gestionlille1.model
+package com.tac.hqrd.gestionlille1.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Issue(
-    @PrimaryKey private var uid: Long,
+data class Issue(
     var type: String,
     var latGps: Float,
     var longGps: Float
 ) {
+    @PrimaryKey(autoGenerate = true)
+    var uid: Long = 0
     var adress: String = ""
     var description: String = ""
 

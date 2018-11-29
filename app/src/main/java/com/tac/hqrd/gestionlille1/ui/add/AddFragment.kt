@@ -15,19 +15,24 @@ class AddFragment : Fragment() {
 
     private lateinit var viewModel: ListIssuesViewModel
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.run {
+            viewModel = ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = activity?.run {
-            ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
-        } ?: throw Exception("Invalid Activity")
-
         return inflater.inflate(R.layout.add_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
 
         val navFrament = findNavController()
         button.setOnClickListener { _ ->

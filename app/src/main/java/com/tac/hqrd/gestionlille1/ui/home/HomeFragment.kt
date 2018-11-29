@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
@@ -30,9 +31,13 @@ class HomeFragment : Fragment() {
             ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        viewModel.issues.observe(viewLifecycleOwner,
+            Observer<List<Any>> { binding.viewmodel = viewModel })
+
         binding.viewmodel = viewModel
         return view
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -42,8 +47,6 @@ class HomeFragment : Fragment() {
             val action = HomeFragmentDirections.actionHomeFragmentToAddFragment()
             navFrament.navigate(action)
         }
-
-
     }
 
 }
