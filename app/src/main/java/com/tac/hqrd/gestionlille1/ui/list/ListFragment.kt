@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.tac.hqrd.gestionlille1.R
@@ -34,8 +35,13 @@ class ListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
 
-        binding.viewmodel = viewModel
+        viewModel.issues.observe(viewLifecycleOwner,
+            Observer<List<Any>> {
+                viewModel.updateNumberIssues()
+                binding.viewmodel = viewModel
+            })
 
+        binding.viewmodel = viewModel
         return view
     }
 
@@ -44,7 +50,8 @@ class ListFragment : Fragment() {
 
 
         val navFrament = findNavController()
-        button2.setOnClickListener { _ ->
+        buttonClean.setOnClickListener { _ ->
+            viewModel.cleanDB()
             Logger.getLogger(javaClass.toString()).info("VM = ${viewModel}")
         }
 

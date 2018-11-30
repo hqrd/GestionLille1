@@ -32,7 +32,10 @@ class HomeFragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         viewModel.issues.observe(viewLifecycleOwner,
-            Observer<List<Any>> { binding.viewmodel = viewModel })
+            Observer<List<Any>> {
+                viewModel.updateNumberIssues()
+                binding.viewmodel = viewModel
+            })
 
         binding.viewmodel = viewModel
         return view

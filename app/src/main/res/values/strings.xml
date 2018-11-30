@@ -3,4 +3,6 @@
     <string name="ajouter">Ajouter</string>
     <string name="rechercher">Rechercher</string>
     <string name="acceuil">acceuil</string>
+    <string name="deleteAll">Tout supprimer</string>
+    <string name="save">Sauvegarder</string>
 </resources>

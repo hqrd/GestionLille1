@@ -17,7 +17,6 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
     init {
         issueRepository = IssueRepository(application)
         issues = issueRepository.getAllIssues()
-        updateNumberIssues()
     }
 
     fun insert(issue: Issue) {
@@ -25,16 +24,15 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun addIssue() {
-        this.insert(
-            Issue(
-                "Autre", Random.nextFloat(), Random.nextFloat()
-            )
-        )
-        updateNumberIssues()
+        this.insert(Issue("Autre", Random.nextFloat(), Random.nextFloat()))
+    }
+
+    fun cleanDB() {
+        issueRepository.cleanDB()
     }
 
 
-    private fun updateNumberIssues() {
+    fun updateNumberIssues() {
         numberIssues = if (issues.value?.size.toString() != "null") issues.value?.size.toString() else "0"
     }
 

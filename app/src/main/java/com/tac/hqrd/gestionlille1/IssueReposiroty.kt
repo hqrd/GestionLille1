@@ -1,12 +1,12 @@
 package com.tac.hqrd.gestionlille1
 
 import android.app.Application
-import android.os.AsyncTask
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.tac.hqrd.gestionlille1.db.IssuesDatabase
 import com.tac.hqrd.gestionlille1.db.dao.IssueDao
 import com.tac.hqrd.gestionlille1.db.entity.Issue
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class IssueRepository(application: Application) {
 
@@ -24,16 +24,14 @@ class IssueRepository(application: Application) {
     }
 
     fun insert(issue: Issue) {
-        InsertAsyncTask(issueDao).execute(issue)
+        GlobalScope.launch {
+            issueDao.insertAll(issue)
+        }
     }
 
-    private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: IssueDao) :
-        AsyncTask<Issue, Void, Void>() {
-
-        override fun doInBackground(vararg params: Issue): Void? {
-            Log.d("BACKGROUND", params.toString())
-            mAsyncTaskDao.insertAll(params[0])
-            return null
+    fun cleanDB() {
+        GlobalScope.launch {
+            issueDao.deleteAll()
         }
     }
 
