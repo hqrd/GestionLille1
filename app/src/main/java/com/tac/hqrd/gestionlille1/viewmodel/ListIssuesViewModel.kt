@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.tac.hqrd.gestionlille1.IssueRepository
+import com.tac.hqrd.gestionlille1.db.IssueType
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 import kotlin.random.Random
 
@@ -24,7 +25,7 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun addIssue() {
-        this.insert(Issue("Autre", Random.nextFloat(), Random.nextFloat()))
+        this.insert(Issue(IssueType.OTHER, Random.nextFloat(), Random.nextFloat()))
     }
 
     fun cleanDB() {

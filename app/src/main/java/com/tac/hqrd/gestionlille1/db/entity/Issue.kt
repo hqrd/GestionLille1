@@ -2,10 +2,11 @@ package com.tac.hqrd.gestionlille1.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.tac.hqrd.gestionlille1.db.IssueType
 
 @Entity
 data class Issue(
-    var type: String,
+    var type: IssueType,
     var latGps: Float,
     var longGps: Float
 ) {
@@ -15,7 +16,7 @@ data class Issue(
     var description: String = ""
 
     override fun toString(): String {
-        return "Issue(uid=$uid, type='$type', latGps=$latGps, longGps=$longGps, adress='$adress', description='$description')"
+        return "Issue(uid=$uid, stringType='$type', latGps=$latGps, longGps=$longGps, adress='$adress', description='$description')"
     }
 
 
