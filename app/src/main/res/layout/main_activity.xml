@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-
+        android:id="@+id/main.coordlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationView"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/main.appbar"
@@ -20,7 +24,7 @@
                 android:id="@+id/main.toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll" />
+                app:layout_scrollFlags="scroll|enterAlways" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,7 +32,6 @@
             android:id="@+id/main.framelayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="42dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <fragment
@@ -46,15 +49,12 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="42dp"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/bottom_nav_colors"
         app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
         tools:itemIconTint="@android:color/white" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

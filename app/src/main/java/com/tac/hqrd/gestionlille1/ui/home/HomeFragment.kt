@@ -22,11 +22,13 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: ListIssuesViewModel
     private lateinit var binding: HomeFragmentBinding
 
+    private lateinit var appbar: AppBarLayout
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        val tb = activity!!.findViewById(R.id.main_appbar) as AppBarLayout
-        tb.setExpanded(true, true)
+        appbar = activity!!.findViewById(R.id.main_appbar) as AppBarLayout
+        appbar.setExpanded(true, true)
     }
 
     override fun onCreateView(
