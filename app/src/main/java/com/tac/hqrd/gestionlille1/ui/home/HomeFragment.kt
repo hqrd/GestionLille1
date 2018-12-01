@@ -1,5 +1,6 @@
 package com.tac.hqrd.gestionlille1.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.tac.hqrd.gestionlille1.R
 import com.tac.hqrd.gestionlille1.databinding.HomeFragmentBinding
 import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
@@ -19,6 +21,13 @@ class HomeFragment : Fragment() {
 
     private lateinit var viewModel: ListIssuesViewModel
     private lateinit var binding: HomeFragmentBinding
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        val tb = activity!!.findViewById(R.id.main_appbar) as AppBarLayout
+        tb.setExpanded(true, true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

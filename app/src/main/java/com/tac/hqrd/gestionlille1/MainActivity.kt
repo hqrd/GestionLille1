@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        setSupportActionBar(findViewById(R.id.main_toolbar))
+
         navFrament = findNavController(R.id.nav_host_fragment)
 
         viewModel = ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
