@@ -33,13 +33,10 @@ class AddFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
         val navFrament = findNavController()
-        button.setOnClickListener { _ ->
+        button.setOnClickListener {
             viewModel.addIssue()
-            val testString = "alo"
             val action = AddFragmentDirections.actionToListFragment()
-            action.setTest(testString)
             navFrament.navigate(action)
         }
     }

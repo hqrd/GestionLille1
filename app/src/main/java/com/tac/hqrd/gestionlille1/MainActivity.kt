@@ -16,12 +16,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
         navFrament = findNavController(R.id.nav_host_fragment)
 
         viewModel = ViewModelProviders.of(this).get(ListIssuesViewModel::class.java)
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigation.setupWithNavController(navFrament)
+
+        //        buttonClean.setOnClickListener { _ ->
+//            viewModel.cleanDB()
+//            Logger.getLogger(javaClass.toString()).info("VM = ${viewModel}")
+//        }
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()

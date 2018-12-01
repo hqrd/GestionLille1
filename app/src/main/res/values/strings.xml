@@ -1,8 +1,13 @@
 <resources>
-    <string name="app_name">Gestion Lille 1</string>
+    <string name="app_name">Gestion du parc vert de Lille 1</string>
     <string name="ajouter">Ajouter</string>
     <string name="rechercher">Rechercher</string>
     <string name="acceuil">acceuil</string>
     <string name="deleteAll">Tout supprimer</string>
     <string name="save">Sauvegarder</string>
+    <string name="problems_to_solve">problèmes à résoudre</string>
+    <string name="message_welcome">Bienvenue sur l\'application de gestion des tâches d\'entretien du parc vert de Lille 1</string>
+    <string name="logo_parc_lille">logo parc lille</string>
+    <string name="see_tasks">Voir les tâches</string>
+    <string name="add_task">Ajouter une tâche</string>
 </resources>

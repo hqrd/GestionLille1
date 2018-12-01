@@ -38,6 +38,9 @@ class HomeFragment : Fragment() {
             })
 
         binding.viewmodel = viewModel
+
+
+
         return view
     }
 
@@ -46,8 +49,12 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val navFrament = findNavController()
-        buttonAdd.setOnClickListener { _ ->
+        buttonAdd.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToAddFragment()
+            navFrament.navigate(action)
+        }
+        buttonView.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToListFragment()
             navFrament.navigate(action)
         }
     }

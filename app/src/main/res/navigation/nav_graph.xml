@@ -22,10 +22,6 @@
         android:name="com.tac.hqrd.gestionlille1.ui.list.ListFragment"
         android:label="list_fragment"
         tools:layout="@layout/list_fragment">
-        <argument
-            android:name="test"
-            android:defaultValue="Oskour"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -39,5 +35,8 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>
