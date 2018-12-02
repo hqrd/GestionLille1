@@ -10,24 +10,43 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 import com.tac.hqrd.gestionlille1.R
 import com.tac.hqrd.gestionlille1.databinding.ListFragmentBinding
+import com.tac.hqrd.gestionlille1.helper.LocationHelper
 import com.tac.hqrd.gestionlille1.helper.ScrollFragmentHelper
 import com.tac.hqrd.gestionlille1.ui.adapter.IssueListAdapter
 import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.android.synthetic.main.list_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: ListIssuesViewModel
     private lateinit var binding: ListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var mAdapter: IssueListAdapter
+    private var mLat: Double = 0.0
+    private var mLong: Double = 0.0
+
+    private var gmap: GoogleMap? = null
+
+    override fun onMapReady(googleMap: GoogleMap?) {
+        gmap = googleMap
+        gmap?.setMinZoomPreference(12F)
+        val ny = LatLng(40.7143528, -74.0059731)
+        gmap?.moveCamera(CameraUpdateFactory.newLatLng(ny))
+    }
 
     override fun onResume() {
         super.onResume()
         ScrollFragmentHelper.startScroll(activity)
+        mAdapter.onResume()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,10 +67,20 @@ class ListFragment : Fragment() {
             Observer<List<Any>> {
                 viewModel.updateNumberIssues()
                 binding.viewmodel = viewModel
-                mAdapter = IssueListAdapter(viewModel.issues.value!!)
+                mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong)
                 listIssues.adapter = mAdapter
             })
 
+        GlobalScope.launch {
+            LocationHelper.getLastLoc(activity!!, false) { adresses ->
+                if (!adresses.isEmpty()) {
+                    mLat = adresses[0].latitude
+                    mLong = adresses[0].longitude
+                    mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong)
+                    listIssues.adapter = mAdapter
+                }
+            }
+        }
         //todo clique sur une card => redirection vers détail de l'issue
 
         binding.viewmodel = viewModel

@@ -19,3 +19,7 @@ Permissions : https://developer.android.com/guide/topics/permissions/overview
 
 Play Store :
 https://support.google.com/googleplay/android-developer/answer/7384423
+
+
+Maps api :
+https://console.developers.google.com/apis/dashboard?project=robotic-casing-224322&duration=PT1H

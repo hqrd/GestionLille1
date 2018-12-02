@@ -126,6 +126,7 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private fun updateAddress(around: Boolean = false) {
         GlobalScope.launch {
 
+            buttonLoc.isEnabled = false
             editTextAddress.isEnabled = false
             LocationHelper.getLastLoc(activity!!, around) { adresses ->
                 if (adresses.isEmpty()) {
@@ -150,6 +151,7 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 activity?.runOnUiThread {
                     editTextAddress?.isEnabled = true
+                    buttonLoc.isEnabled = true
                 }
             }
 
