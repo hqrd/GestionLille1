@@ -45,8 +45,6 @@ class HomeFragment : Fragment() {
 
         binding.viewmodel = viewModel
 
-
-
         return view
     }
 

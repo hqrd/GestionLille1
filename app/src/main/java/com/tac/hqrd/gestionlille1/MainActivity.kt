@@ -41,13 +41,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_delete_all -> {
-            Toast.makeText(this, "Suppression des tâches.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getText(R.string.deleting_tasks), Toast.LENGTH_SHORT).show()
             viewModel.cleanDB()
             true
         }
 
         R.id.action_fixtures -> {
-            Toast.makeText(this, "Ajout de 5 tâches.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getText(R.string.adding_fixtures), Toast.LENGTH_SHORT).show()
             GlobalScope.launch {
                 repeat(5) {
                     viewModel.addIssue()

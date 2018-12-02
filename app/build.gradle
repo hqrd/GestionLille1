@@ -41,6 +41,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07"
