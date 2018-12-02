@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tac.hqrd.gestionlille1.R
 import com.tac.hqrd.gestionlille1.databinding.ListFragmentBinding
+import com.tac.hqrd.gestionlille1.helper.ScrollFragmentHelper
 import com.tac.hqrd.gestionlille1.ui.adapter.IssueListAdapter
 import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.android.synthetic.main.list_fragment.*
@@ -23,6 +24,11 @@ class ListFragment : Fragment() {
     private lateinit var binding: ListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var mAdapter: IssueListAdapter
+
+    override fun onResume() {
+        super.onResume()
+        ScrollFragmentHelper.startScroll(activity)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +51,8 @@ class ListFragment : Fragment() {
                 mAdapter = IssueListAdapter(viewModel.issues.value!!)
                 listIssues.adapter = mAdapter
             })
+
+        //todo clique sur une card => redirection vers détail de l'issue
 
         binding.viewmodel = viewModel
 
