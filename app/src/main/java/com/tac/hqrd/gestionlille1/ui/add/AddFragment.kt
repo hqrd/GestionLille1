@@ -110,7 +110,11 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
         parent.getItemAtPosition(pos)
-        //todo spinner
+        issueViewmodel.issue.apply {
+            val issue: Issue = value!!
+            issue.type = IssueType.fromString(parent.getItemAtPosition(pos).toString())
+            postValue(issue)
+        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
@@ -121,6 +125,7 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
      */
     private fun updateAddress(around: Boolean = false) {
         GlobalScope.launch {
+
             editTextAddress.isEnabled = false
             LocationHelper.getLastLoc(activity!!, around) { adresses ->
                 if (adresses.isEmpty()) {
@@ -141,12 +146,15 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     issue.adress = mAddress
                     issue.latGps = mLat
                     issue.longGps = mLong
-                    value = issue
+                    postValue(issue)
                 }
-                editTextAddress.isEnabled = true
+                activity?.runOnUiThread {
+                    editTextAddress?.isEnabled = true
+                }
             }
-        }
-    }
 
+        }
+
+    }
 
 }

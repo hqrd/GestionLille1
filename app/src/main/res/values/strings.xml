@@ -19,7 +19,7 @@
     <string name="location">location</string>
     <string name="description">Description</string>
     <string name="address">Adresse</string>
-    <string name="fields_missing">Il manque un champ requis.</string>
+    <string name="fields_missing">La localisation est requise pour ajouter une tâche.</string>
     <string-array name="issue_type_array">
         <item>Arbre à tailler</item>
         <item>Arbre à abattre</item>

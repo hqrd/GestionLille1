@@ -41,10 +41,11 @@ class IssueListAdapter(private val issues: List<Issue>) : RecyclerView.Adapter<I
 
         fun bindIssue(issue: Issue) {
             this.issue = issue
-//            Picasso.with(view.context).load(issues.issue_image_url).into(view.iv_cover)
             view.titleCard.text = issue.type.stringType
-            view.adressCard.text = issue.latGps.toString()
+            view.adressCard.text = issue.adress
             view.descCard.text = issue.description
+            //todo afficher distance
+            //todo map
         }
     }
 }

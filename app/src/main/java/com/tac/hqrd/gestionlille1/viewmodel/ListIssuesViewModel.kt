@@ -2,6 +2,7 @@ package com.tac.hqrd.gestionlille1.viewmodel
 
 import android.app.Activity
 import android.app.Application
+import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -30,11 +31,15 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
     suspend fun addGeneratedIssue(activity: Activity) {
         LocationHelper.getLastLoc(activity, true) { adresses ->
             if (adresses.isEmpty()) {
+                if (Looper.myLooper() == null) {
+                    Looper.prepare()
+                }
                 Toast.makeText(activity, activity.resources.getText(R.string.no_adress_found), Toast.LENGTH_SHORT)
                     .show()
             } else {
                 val issue = Issue(IssueType.randomType(), adresses[0].latitude, adresses[0].longitude)
                 issue.adress = adresses[0].getAddressLine(0)
+                issue.description = "Description générée automatiquement"
                 this.insert(issue)
             }
         }
