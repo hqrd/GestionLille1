@@ -7,8 +7,8 @@ import com.tac.hqrd.gestionlille1.db.IssueType
 @Entity
 data class Issue(
     var type: IssueType,
-    var latGps: Float,
-    var longGps: Float
+    var latGps: Double,
+    var longGps: Double
 ) {
     @PrimaryKey(autoGenerate = true)
     var uid: Long = 0

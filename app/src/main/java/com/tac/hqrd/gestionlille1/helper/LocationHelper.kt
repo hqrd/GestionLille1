@@ -1,6 +1,7 @@
 package com.tac.hqrd.gestionlille1.helper
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Address
@@ -10,7 +11,6 @@ import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -51,8 +51,10 @@ class LocationHelper {
         /**
          * Return a list containing 1 adress for the current location, after 1 second in a callback method
          * List may be empty if Geocoder couldn't find an adress
+         *
+         * @param around : set to true to generate a random address withing 500 meters
          */
-        suspend fun getLastLoc(activity: FragmentActivity, around: Boolean, callback: (List<Address>) -> Unit) {
+        suspend fun getLastLoc(activity: Activity, around: Boolean, callback: (List<Address>) -> Unit) {
             var adresses: List<Address> = emptyList()
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 

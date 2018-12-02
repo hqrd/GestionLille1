@@ -1,12 +1,15 @@
 package com.tac.hqrd.gestionlille1.viewmodel
 
+import android.app.Activity
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.tac.hqrd.gestionlille1.IssueRepository
+import com.tac.hqrd.gestionlille1.R
 import com.tac.hqrd.gestionlille1.db.IssueType
 import com.tac.hqrd.gestionlille1.db.entity.Issue
-import kotlin.random.Random
+import com.tac.hqrd.gestionlille1.helper.LocationHelper
 
 
 class ListIssuesViewModel(application: Application) : AndroidViewModel(application) {
@@ -24,8 +27,17 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
         issueRepository.insert(issue)
     }
 
-    fun addIssue() {
-        this.insert(Issue(IssueType.OTHER, Random.nextFloat(), Random.nextFloat()))
+    suspend fun addGeneratedIssue(activity: Activity) {
+        LocationHelper.getLastLoc(activity, true) { adresses ->
+            if (adresses.isEmpty()) {
+                Toast.makeText(activity, activity.resources.getText(R.string.no_adress_found), Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                val issue = Issue(IssueType.randomType(), adresses[0].latitude, adresses[0].longitude)
+                issue.adress = adresses[0].getAddressLine(0)
+                this.insert(issue)
+            }
+        }
     }
 
     fun cleanDB() {

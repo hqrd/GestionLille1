@@ -10,7 +10,7 @@ class IssueToAddViewModel : ViewModel() {
     val issue: MutableLiveData<Issue> = MutableLiveData()
 
     init {
-        issue.value = Issue(IssueType.OTHER, 0f, 0f)
+        issue.value = Issue(IssueType.TREE_TO_TRIM, 0.0, 0.0)
     }
 
     override fun toString(): String {

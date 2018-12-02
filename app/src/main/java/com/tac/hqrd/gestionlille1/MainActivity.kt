@@ -47,10 +47,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         R.id.action_fixtures -> {
+            val self = this
             Toast.makeText(this, resources.getText(R.string.adding_fixtures), Toast.LENGTH_SHORT).show()
             GlobalScope.launch {
                 repeat(5) {
-                    viewModel.addIssue()
+                    viewModel.addGeneratedIssue(self)
                 }
             }
             true
