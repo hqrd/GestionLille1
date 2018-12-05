@@ -76,7 +76,8 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
         super.onActivityCreated(savedInstanceState)
         val navFrament = findNavController()
 
-        button.setOnClickListener {
+        //todo bouton sauvegarder qui gêne quand on tape la desc
+        buttonSave.setOnClickListener {
             if (checkLatLong()) {
                 viewModel.insert(issueViewmodel.issue.value!!)
                 issueViewmodel.issue.postValue(Issue(IssueType.TREE_TO_TRIM, 0.0, 0.0))
@@ -127,6 +128,7 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
      * Updates the internal and displayed address
      */
     private fun updateAddress(around: Boolean = false) {
+        //todo pb de permission sur les anciennes versions api
         GlobalScope.launch {
 
             buttonLoc.isEnabled = false

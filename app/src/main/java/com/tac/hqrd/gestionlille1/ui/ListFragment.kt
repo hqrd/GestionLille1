@@ -64,6 +64,7 @@ class ListFragment : Fragment(), OnMapReadyCallback {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
 
+        //todo pb permission quand on lance
         val self = this
         GlobalScope.launch {
             LocationHelper.getLastLoc(activity!!, false) { adresses ->
@@ -79,13 +80,14 @@ class ListFragment : Fragment(), OnMapReadyCallback {
                             binding.viewmodel = viewModel
                             mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
                             listIssues.adapter = mAdapter
+                            if (viewModel.issues.value.isNullOrEmpty()) {
+                                textListEmpty.text = getString(R.string.no_problem)
+                            } else {
+                                textListEmpty.text = ""
+                            }
                         })
                     loader.hide()
-                    if (viewModel.issues.value.isNullOrEmpty()) {
-                        textListEmpty.text = getString(R.string.no_problem)
-                    } else {
-                        textListEmpty.text = ""
-                    }
+
                 }
 
             }

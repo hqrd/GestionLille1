@@ -83,7 +83,7 @@
             android:contentDescription="@string/location" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
