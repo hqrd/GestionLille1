@@ -3,10 +3,11 @@ package com.tac.hqrd.gestionlille1.ui.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -14,17 +15,22 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.tac.hqrd.gestionlille1.MainActivity.Companion.googleMap
 import com.tac.hqrd.gestionlille1.R
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 import com.tac.hqrd.gestionlille1.helper.LocationHelper
+import com.tac.hqrd.gestionlille1.ui.ListFragmentDirections
 import kotlinx.android.synthetic.main.issue_card.view.*
 
 
-class IssueListAdapter(private val issues: List<Issue>, private val mLat: Double, private val mLong: Double) :
+class IssueListAdapter(
+    private val issues: List<Issue>,
+    private val mLat: Double,
+    private val mLong: Double,
+    private val fragment: com.tac.hqrd.gestionlille1.ui.ListFragment
+) :
     RecyclerView.Adapter<IssueListAdapter.IssueHolder>() {
-    companion object {
-        lateinit var googleMap: GoogleMap
-    }
+
 
     private lateinit var holder: IssueHolder
 
@@ -34,7 +40,7 @@ class IssueListAdapter(private val issues: List<Issue>, private val mLat: Double
 
     override fun onBindViewHolder(holder: IssueListAdapter.IssueHolder, position: Int) {
         val itemIssue = issues[position]
-        holder.bindIssue(itemIssue, mLat, mLong)
+        holder.bindIssue(itemIssue, mLat, mLong, fragment)
         holder.onResume()
     }
 
@@ -50,26 +56,55 @@ class IssueListAdapter(private val issues: List<Issue>, private val mLat: Double
             holder.onResume()
     }
 
-    class IssueHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener, OnMapReadyCallback {
+    fun onLowMemory() {
+        if (::holder.isInitialized)
+            holder.onLowMemory()
+    }
 
-        private var view: View = v
+    fun onPause() {
+        if (::holder.isInitialized)
+            holder.onPause()
+    }
+
+    fun onStart() {
+        if (::holder.isInitialized)
+            holder.onStart()
+    }
+
+    fun onStop() {
+        if (::holder.isInitialized)
+            holder.onStop()
+    }
+
+    class IssueHolder(private var view: View) : RecyclerView.ViewHolder(view), OnMapReadyCallback {
+
         private var issue: Issue? = null
         private val mapView: MapView
+        private lateinit var fragment: Fragment
 
 
         init {
-            v.setOnClickListener { this }
-            mapView = v.findViewById(R.id.mapView) as MapView
+            view.setOnClickListener { onClick() }
+            mapView = view.findViewById(R.id.mapView) as MapView
             mapView.onCreate(null)
             mapView.getMapAsync(this)
         }
 
-        override fun onClick(v: View?) {
-            Log.d("RecyclerView", "CLICK!")
+        fun onClick() {
+            val navFrament = fragment.findNavController()
+            val action = ListFragmentDirections.actionListFragmentToIssueDetailsFragment()
+            issue?.uid?.let { action.setUidIssue(it) }
+            navFrament.navigate(action)
         }
 
         @SuppressLint("SetTextI18n")
-        fun bindIssue(issue: Issue, mLat: Double, mLong: Double) {
+        fun bindIssue(
+            issue: Issue,
+            mLat: Double,
+            mLong: Double,
+            fragment: Fragment
+        ) {
+            this.fragment = fragment
             this.issue = issue
             if (mLat != 0.0 && mLong != 0.0) {
                 view.titleCard.text = issue.type.stringType + " (" +
@@ -98,5 +133,22 @@ class IssueListAdapter(private val issues: List<Issue>, private val mLat: Double
         fun onResume() {
             mapView.onResume()
         }
+
+        fun onLowMemory() {
+            mapView.onLowMemory()
+        }
+
+        fun onPause() {
+            mapView.onPause()
+        }
+
+        fun onStart() {
+            mapView.onStart()
+        }
+
+        fun onStop() {
+            mapView.onStop()
+        }
+
     }
 }

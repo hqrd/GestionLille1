@@ -28,6 +28,10 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
         issueRepository.insert(issue)
     }
 
+    fun findById(uid: Long): LiveData<Issue> {
+        return issueRepository.findById(uid)
+    }
+
     suspend fun addGeneratedIssue(activity: Activity) {
         LocationHelper.getLastLoc(activity, true) { adresses ->
             if (adresses.isEmpty()) {
@@ -49,6 +53,9 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
         issueRepository.cleanDB()
     }
 
+    fun delete(issue: Issue) {
+        issueRepository.delete(issue)
+    }
 
     fun updateNumberIssues() {
         numberIssues = if (issues.value?.size.toString() != "null") issues.value?.size.toString() else "0"
@@ -57,6 +64,7 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
     override fun toString(): String {
         return "ListIssuesViewModel(issues=${issues.value}, numberIssues='$numberIssues')"
     }
+
 
 }
 

@@ -9,13 +9,12 @@ Viewmodel : https://developer.android.com/topic/libraries/architecture/viewmodel
 DataBinding : https://developer.android.com/topic/libraries/data-binding/
 BDD : https://developer.android.com/topic/libraries/architecture/room
 Adapter list :https://developer.android.com/guide/topics/ui/declaring-layout#kotlin
-
+Location : https://developer.android.com/guide/topics/location/strategies
+Permissions : https://developer.android.com/guide/topics/permissions/overview
 
 
 https://developer.android.com/kotlin/ktx
 
-Location : https://developer.android.com/guide/topics/location/strategies
-Permissions : https://developer.android.com/guide/topics/permissions/overview
 
 Play Store :
 https://support.google.com/googleplay/android-developer/answer/7384423

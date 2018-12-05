@@ -12,6 +12,9 @@ interface IssueDao {
     @Query("SELECT * FROM Issue")
     fun getAll(): LiveData<List<Issue>>
 
+    @Query("SELECT * FROM Issue WHERE uid = :uid limit 1")
+    fun findById(uid: Long): LiveData<Issue>
+
     @Insert
     fun insertAll(vararg issues: Issue)
 

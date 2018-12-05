@@ -15,12 +15,16 @@ class IssueRepository(application: Application) {
 
     init {
         val issueRoomDatabase = IssuesDatabase.getDatabase(application)
-        issueDao = issueRoomDatabase?.issueDao()!!
+        issueDao = issueRoomDatabase.issueDao()
         listLiveData = issueDao.getAll()
     }
 
     fun getAllIssues(): LiveData<List<Issue>> {
         return listLiveData
+    }
+
+    fun findById(uid: Long): LiveData<Issue> {
+        return issueDao.findById(uid)
     }
 
     fun insert(issue: Issue) {
@@ -32,6 +36,12 @@ class IssueRepository(application: Application) {
     fun cleanDB() {
         GlobalScope.launch {
             issueDao.deleteAll()
+        }
+    }
+
+    fun delete(issue: Issue) {
+        GlobalScope.launch {
+            issueDao.delete(issue)
         }
     }
 

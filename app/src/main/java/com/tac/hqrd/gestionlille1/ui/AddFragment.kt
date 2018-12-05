@@ -108,6 +108,9 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
         } ?: false
     }
 
+    /**
+     * Listener of the spinner for the type of issue
+     */
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
         parent.getItemAtPosition(pos)
         issueViewmodel.issue.apply {

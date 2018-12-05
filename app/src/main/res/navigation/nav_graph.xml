@@ -22,6 +22,13 @@
         android:name="com.tac.hqrd.gestionlille1.ui.ListFragment"
         android:label="list_fragment"
         tools:layout="@layout/list_fragment">
+        <action
+            android:id="@+id/action_listFragment_to_issueDetailsFragment"
+            app:destination="@id/issueDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -37,6 +44,18 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_homeFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/issueDetailsFragment"
+        android:name="com.tac.hqrd.gestionlille1.ui.IssueDetailsFragment"
+        android:label="IssueDetailsFragment">
+        <argument
+            android:name="uidIssue"
+            android:defaultValue="-1L" />
     </fragment>
 </navigation>

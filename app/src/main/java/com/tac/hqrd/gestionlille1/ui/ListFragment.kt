@@ -63,9 +63,12 @@ class ListFragment : Fragment(), OnMapReadyCallback {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
+
+        val self = this
         GlobalScope.launch {
             LocationHelper.getLastLoc(activity!!, false) { adresses ->
                 getView()?.let {
+                    //to make sure we're on the page
                     if (!adresses.isEmpty()) {
                         mLat = adresses[0].latitude
                         mLong = adresses[0].longitude
@@ -74,7 +77,7 @@ class ListFragment : Fragment(), OnMapReadyCallback {
                         Observer<List<Any>> {
                             viewModel.updateNumberIssues()
                             binding.viewmodel = viewModel
-                            mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong)
+                            mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
                             listIssues.adapter = mAdapter
                         })
                     loader.hide()
@@ -82,7 +85,6 @@ class ListFragment : Fragment(), OnMapReadyCallback {
 
             }
         }
-        //todo clique sur une card => redirection vers détail de l'issue
 
         binding.viewmodel = viewModel
 
@@ -96,8 +98,38 @@ class ListFragment : Fragment(), OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState)
 
         val navFrament = findNavController()
+
+        buttonUp.setOnClickListener {
+            //todo scroll top
+            val action = ListFragmentDirections.actionListFragmentToIssueDetailsFragment()
+            action.setUidIssue(1L)
+            navFrament.navigate(action)
+        }
+
         loader.show()
-        //todo scroll top
     }
 
+    override fun onLowMemory() {
+        super.onLowMemory()
+        if (::mAdapter.isInitialized)
+            mAdapter.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (::mAdapter.isInitialized)
+            mAdapter.onPause()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (::mAdapter.isInitialized)
+            mAdapter.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (::mAdapter.isInitialized)
+            mAdapter.onStop()
+    }
 }

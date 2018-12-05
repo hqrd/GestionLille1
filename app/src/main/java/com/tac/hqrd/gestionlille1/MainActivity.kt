@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.coroutines.GlobalScope
@@ -18,6 +19,10 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     lateinit var navFrament: NavController
     private lateinit var viewModel: ListIssuesViewModel
+
+    companion object {
+        lateinit var googleMap: GoogleMap
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,5 +68,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+
+    fun setDisplayHomeAsUpEnabled(b: Boolean) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(b)
+    }
 
 }
