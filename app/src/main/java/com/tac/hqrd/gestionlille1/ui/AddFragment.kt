@@ -1,4 +1,4 @@
-package com.tac.hqrd.gestionlille1.ui.add
+package com.tac.hqrd.gestionlille1.ui
 
 import android.os.Bundle
 import android.os.Looper
@@ -151,7 +151,7 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 activity?.runOnUiThread {
                     editTextAddress?.isEnabled = true
-                    buttonLoc.isEnabled = true
+                    buttonLoc?.isEnabled = true
                 }
             }
 

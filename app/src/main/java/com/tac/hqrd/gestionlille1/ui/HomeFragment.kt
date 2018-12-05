@@ -1,4 +1,4 @@
-package com.tac.hqrd.gestionlille1.ui.home
+package com.tac.hqrd.gestionlille1.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

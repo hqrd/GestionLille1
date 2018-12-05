@@ -1,4 +1,4 @@
-package com.tac.hqrd.gestionlille1.ui.list
+package com.tac.hqrd.gestionlille1.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -46,7 +46,8 @@ class ListFragment : Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         ScrollFragmentHelper.startScroll(activity)
-        mAdapter.onResume()
+        if (::mAdapter.isInitialized)
+            mAdapter.onResume()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,23 +63,23 @@ class ListFragment : Fragment(), OnMapReadyCallback {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
-
-        viewModel.issues.observe(viewLifecycleOwner,
-            Observer<List<Any>> {
-                viewModel.updateNumberIssues()
-                binding.viewmodel = viewModel
-                mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong)
-                listIssues.adapter = mAdapter
-            })
-
         GlobalScope.launch {
             LocationHelper.getLastLoc(activity!!, false) { adresses ->
-                if (!adresses.isEmpty()) {
-                    mLat = adresses[0].latitude
-                    mLong = adresses[0].longitude
-                    mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong)
-                    listIssues.adapter = mAdapter
+                getView()?.let {
+                    if (!adresses.isEmpty()) {
+                        mLat = adresses[0].latitude
+                        mLong = adresses[0].longitude
+                    }
+                    viewModel.issues.observe(viewLifecycleOwner,
+                        Observer<List<Any>> {
+                            viewModel.updateNumberIssues()
+                            binding.viewmodel = viewModel
+                            mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong)
+                            listIssues.adapter = mAdapter
+                        })
+                    loader.hide()
                 }
+
             }
         }
         //todo clique sur une card => redirection vers détail de l'issue
@@ -95,7 +96,8 @@ class ListFragment : Fragment(), OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState)
 
         val navFrament = findNavController()
-
+        loader.show()
+        //todo scroll top
     }
 
 }

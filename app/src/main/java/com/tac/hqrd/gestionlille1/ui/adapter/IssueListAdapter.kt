@@ -68,10 +68,9 @@ class IssueListAdapter(private val issues: List<Issue>, private val mLat: Double
             Log.d("RecyclerView", "CLICK!")
         }
 
-        @SuppressLint("SetTextI18n")//todo concat in xml
+        @SuppressLint("SetTextI18n")
         fun bindIssue(issue: Issue, mLat: Double, mLong: Double) {
             this.issue = issue
-
             if (mLat != 0.0 && mLong != 0.0) {
                 view.titleCard.text = issue.type.stringType + " (" +
                         Math.round(LocationHelper.distance(mLat, issue.latGps, mLong, issue.longGps)) +
@@ -81,8 +80,6 @@ class IssueListAdapter(private val issues: List<Issue>, private val mLat: Double
             }
             view.adressCard.text = issue.adress
             view.descCard.text = issue.description
-
-            //todo map
         }
 
         override fun onMapReady(gMap: GoogleMap) {
