@@ -81,6 +81,11 @@ class ListFragment : Fragment(), OnMapReadyCallback {
                             listIssues.adapter = mAdapter
                         })
                     loader.hide()
+                    if (viewModel.issues.value.isNullOrEmpty()) {
+                        textListEmpty.text = getString(R.string.no_problem)
+                    } else {
+                        textListEmpty.text = ""
+                    }
                 }
 
             }

@@ -33,4 +33,5 @@
     <string name="viewOnGmap">Voir sur Maps</string>
     <string name="delete">Supprimer</string>
     <string name="deleting_task">Tâche supprimée</string>
+    <string name="no_problem">Aucun problème ! :)</string>
 </resources>
