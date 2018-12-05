@@ -1,7 +1,6 @@
 package com.tac.hqrd.gestionlille1.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.tac.hqrd.gestionlille1.MainActivity
 import com.tac.hqrd.gestionlille1.MainActivity.Companion.googleMap
 import com.tac.hqrd.gestionlille1.R
@@ -108,8 +107,8 @@ class IssueDetailsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
         val position = LatLng(mIssue.latGps, mIssue.longGps)
-        googleMap.addCircle(
-            CircleOptions().center(position).radius(20.0).fillColor(Color.GRAY).strokeColor(Color.GRAY)
+        googleMap.addMarker(
+            MarkerOptions().position(position).title(mIssue.adress)
         )
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(position))
         googleMap.setMinZoomPreference(15F)
