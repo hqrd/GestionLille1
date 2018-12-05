@@ -101,9 +101,6 @@ class ListFragment : Fragment(), OnMapReadyCallback {
 
         buttonUp.setOnClickListener {
             //todo scroll top
-            val action = ListFragmentDirections.actionListFragmentToIssueDetailsFragment()
-            action.setUidIssue(1L)
-            navFrament.navigate(action)
         }
 
         loader.show()
