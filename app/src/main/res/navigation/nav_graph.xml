@@ -2,6 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
     <fragment
@@ -9,6 +10,7 @@
         android:name="com.tac.hqrd.gestionlille1.ui.AddFragment"
         android:label="AddFragment">
         <action
+            android:id="@+id/action_to_listFragment"
             app:destination="@id/listFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -21,6 +23,7 @@
         android:label="list_fragment"
         tools:layout="@layout/list_fragment">
         <action
+            android:id="@+id/action_listFragment_to_issueDetailsFragment"
             app:destination="@id/issueDetailsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -33,12 +36,14 @@
         android:label="home_fragment"
         tools:layout="@layout/home_fragment">
         <action
+            android:id="@+id/action_homeFragment_to_addFragment"
             app:destination="@id/addFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
+            android:id="@+id/action_homeFragment_to_listFragment"
             app:destination="@id/listFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

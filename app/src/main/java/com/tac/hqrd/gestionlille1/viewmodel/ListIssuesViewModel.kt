@@ -6,8 +6,8 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.tac.hqrd.gestionlille1.IssueRepository
 import com.tac.hqrd.gestionlille1.R
-import com.tac.hqrd.gestionlille1.db.IssueRepository
 import com.tac.hqrd.gestionlille1.db.IssueType
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 import com.tac.hqrd.gestionlille1.helper.LocationHelper

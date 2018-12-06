@@ -1,7 +1,8 @@
-package com.tac.hqrd.gestionlille1.db
+package com.tac.hqrd.gestionlille1
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.tac.hqrd.gestionlille1.db.IssuesDatabase
 import com.tac.hqrd.gestionlille1.db.dao.IssueDao
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 import kotlinx.coroutines.GlobalScope
