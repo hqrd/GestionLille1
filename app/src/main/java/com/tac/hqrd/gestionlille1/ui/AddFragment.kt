@@ -134,18 +134,20 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
             buttonLoc.isEnabled = false
             editTextAddress.isEnabled = false
             LocationHelper.getLastLoc(activity!!, around) { adresses ->
-                if (adresses.isEmpty()) {
-                    mAddress = ""
-                    mLat = 0.0
-                    mLong = 0.0
-                    if (Looper.myLooper() == null) {
-                        Looper.prepare()
+                if (adresses != null) {
+                    if (adresses.isEmpty()) {
+                        mAddress = ""
+                        mLat = 0.0
+                        mLong = 0.0
+                        if (Looper.myLooper() == null) {
+                            Looper.prepare()
+                        }
+                        Toast.makeText(activity, resources.getText(R.string.no_adress_found), Toast.LENGTH_SHORT).show()
+                    } else {
+                        mAddress = adresses[0].getAddressLine(0)
+                        mLat = adresses[0].latitude
+                        mLong = adresses[0].longitude
                     }
-                    Toast.makeText(activity, resources.getText(R.string.no_adress_found), Toast.LENGTH_SHORT).show()
-                } else {
-                    mAddress = adresses[0].getAddressLine(0)
-                    mLat = adresses[0].latitude
-                    mLong = adresses[0].longitude
                 }
                 issueViewmodel.issue.apply {
                     val issue: Issue = value!!

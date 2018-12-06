@@ -54,7 +54,7 @@ class LocationHelper {
          *
          * @param around : set to true to generate a random address withing 500 meters
          */
-        suspend fun getLastLoc(activity: Activity, around: Boolean, callback: (List<Address>) -> Unit) {
+        suspend fun getLastLoc(activity: Activity, around: Boolean, callback: (List<Address>?) -> Unit) {
             var adresses: List<Address> = emptyList()
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
@@ -98,7 +98,7 @@ class LocationHelper {
                 ActivityCompat.requestPermissions(
                     activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
                 )
-                callback.invoke(adresses)
+                callback.invoke(null)
             }
         }
 

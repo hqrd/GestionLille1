@@ -64,29 +64,31 @@ class ListFragment : Fragment(), OnMapReadyCallback {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
 
-        //todo pb permission quand on lance
         val self = this
         GlobalScope.launch {
             LocationHelper.getLastLoc(activity!!, false) { adresses ->
                 getView()?.let {
                     //to make sure we're on the page
-                    if (!adresses.isEmpty()) {
-                        mLat = adresses[0].latitude
-                        mLong = adresses[0].longitude
+                    if (adresses != null) {
+                        if (!adresses.isEmpty()) {
+                            mLat = adresses[0].latitude
+                            mLong = adresses[0].longitude
+                        }
+
+                        viewModel.issues.observe(viewLifecycleOwner,
+                            Observer<List<Any>> {
+                                viewModel.updateNumberIssues()
+                                binding.viewmodel = viewModel
+                                mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
+                                listIssues.adapter = mAdapter
+                                if (viewModel.issues.value.isNullOrEmpty()) {
+                                    textListEmpty.text = getString(R.string.no_problem)
+                                } else {
+                                    textListEmpty.text = ""
+                                }
+                            })
+                        loader.hide()
                     }
-                    viewModel.issues.observe(viewLifecycleOwner,
-                        Observer<List<Any>> {
-                            viewModel.updateNumberIssues()
-                            binding.viewmodel = viewModel
-                            mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
-                            listIssues.adapter = mAdapter
-                            if (viewModel.issues.value.isNullOrEmpty()) {
-                                textListEmpty.text = getString(R.string.no_problem)
-                            } else {
-                                textListEmpty.text = ""
-                            }
-                        })
-                    loader.hide()
 
                 }
 

@@ -34,17 +34,19 @@ class ListIssuesViewModel(application: Application) : AndroidViewModel(applicati
 
     suspend fun addGeneratedIssue(activity: Activity) {
         LocationHelper.getLastLoc(activity, true) { adresses ->
-            if (adresses.isEmpty()) {
-                if (Looper.myLooper() == null) {
-                    Looper.prepare()
+            if (adresses != null) {
+                if (adresses.isEmpty()) {
+                    if (Looper.myLooper() == null) {
+                        Looper.prepare()
+                    }
+                    Toast.makeText(activity, activity.resources.getText(R.string.no_adress_found), Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    val issue = Issue(IssueType.randomType(), adresses[0].latitude, adresses[0].longitude)
+                    issue.adress = adresses[0].getAddressLine(0)
+                    issue.description = "Description générée automatiquement"
+                    this.insert(issue)
                 }
-                Toast.makeText(activity, activity.resources.getText(R.string.no_adress_found), Toast.LENGTH_SHORT)
-                    .show()
-            } else {
-                val issue = Issue(IssueType.randomType(), adresses[0].latitude, adresses[0].longitude)
-                issue.adress = adresses[0].getAddressLine(0)
-                issue.description = "Description générée automatiquement"
-                this.insert(issue)
             }
         }
     }
