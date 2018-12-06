@@ -20,7 +20,7 @@ class ScrollFragmentHelper {
 
             val appbar = activity!!.findViewById(R.id.main_appbar) as AppBarLayout
             appbar.setExpanded(true, true)
-            val toolbar = activity?.findViewById(R.id.main_toolbar) as Toolbar
+            val toolbar = activity.findViewById(R.id.main_toolbar) as Toolbar
             val p = toolbar.layoutParams as AppBarLayout.LayoutParams
             mScrollFlags = p.scrollFlags
             p.scrollFlags = 0

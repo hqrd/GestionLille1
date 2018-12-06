@@ -84,8 +84,8 @@ class LocationHelper {
                                 var lat = location.latitude
                                 var long = location.longitude
                                 if (around) {
-                                    lat += ThreadLocalRandom.current().nextDouble(-0.004, 0.004);
-                                    long += ThreadLocalRandom.current().nextDouble(-0.004, 0.004);
+                                    lat += ThreadLocalRandom.current().nextDouble(-0.004, 0.004)
+                                    long += ThreadLocalRandom.current().nextDouble(-0.004, 0.004)
                                 }
                                 adresses = LocationHelper.getAdresses(
                                     activity, lat.toFloat(), long.toFloat()

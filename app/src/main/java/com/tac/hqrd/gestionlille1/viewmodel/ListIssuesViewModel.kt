@@ -6,30 +6,28 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.tac.hqrd.gestionlille1.IssueRepository
 import com.tac.hqrd.gestionlille1.R
+import com.tac.hqrd.gestionlille1.db.IssueRepository
 import com.tac.hqrd.gestionlille1.db.IssueType
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 import com.tac.hqrd.gestionlille1.helper.LocationHelper
 
-
+/**
+ * Viewmodel representing the list of issues in the DB
+ */
 class ListIssuesViewModel(application: Application) : AndroidViewModel(application) {
-    private val issueRepository: IssueRepository
+    private val issueRepository: IssueRepository =
+        IssueRepository(application)
     internal val issues: LiveData<List<Issue>>
 
     var numberIssues: String = "0"
 
     init {
-        issueRepository = IssueRepository(application)
         issues = issueRepository.getAllIssues()
     }
 
     fun insert(issue: Issue) {
         issueRepository.insert(issue)
-    }
-
-    fun findById(uid: Long): LiveData<Issue> {
-        return issueRepository.findById(uid)
     }
 
     suspend fun addGeneratedIssue(activity: Activity) {

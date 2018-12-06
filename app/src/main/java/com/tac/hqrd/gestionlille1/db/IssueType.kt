@@ -15,7 +15,7 @@ enum class IssueType(val stringType: String) {
     companion object {
         fun fromString(string: String): IssueType {
             values().forEach {
-                if (it.stringType == string) return it;
+                if (it.stringType == string) return it
             }
             throw RuntimeException("Type not found")
         }

@@ -26,10 +26,6 @@ import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
 import kotlinx.android.synthetic.main.issue_details_fragment.*
 
 class IssueDetailsFragment : Fragment(), OnMapReadyCallback {
-    companion object {
-        private const val TAG: String = "IssueDetailsFragment"
-    }
-
     private lateinit var binding: IssueDetailsFragmentBinding
     private lateinit var viewModel: ListIssuesViewModel
     private var uidIssue: Long = -1

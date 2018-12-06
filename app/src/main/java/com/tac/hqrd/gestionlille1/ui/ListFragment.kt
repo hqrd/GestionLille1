@@ -1,5 +1,6 @@
 package com.tac.hqrd.gestionlille1.ui
 
+import android.location.Address
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -69,26 +69,7 @@ class ListFragment : Fragment(), OnMapReadyCallback {
             LocationHelper.getLastLoc(activity!!, false) { adresses ->
                 getView()?.let {
                     //to make sure we're on the page
-                    if (adresses != null) {
-                        if (!adresses.isEmpty()) {
-                            mLat = adresses[0].latitude
-                            mLong = adresses[0].longitude
-                        }
-
-                        viewModel.issues.observe(viewLifecycleOwner,
-                            Observer<List<Any>> {
-                                viewModel.updateNumberIssues()
-                                binding.viewmodel = viewModel
-                                mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
-                                listIssues.adapter = mAdapter
-                                if (viewModel.issues.value.isNullOrEmpty()) {
-                                    textListEmpty.text = getString(R.string.no_problem)
-                                } else {
-                                    textListEmpty.text = ""
-                                }
-                            })
-                        loader.hide()
-                    }
+                    displayIssues(adresses, self)
 
                 }
 
@@ -103,13 +84,37 @@ class ListFragment : Fragment(), OnMapReadyCallback {
         return view
     }
 
+    private fun displayIssues(
+        adresses: List<Address>?,
+        self: ListFragment
+    ) {
+        if (adresses != null) {
+            if (!adresses.isEmpty()) {
+                mLat = adresses[0].latitude
+                mLong = adresses[0].longitude
+            }
+
+            viewModel.issues.observe(viewLifecycleOwner,
+                Observer<List<Any>> { _ ->
+                    viewModel.updateNumberIssues()
+                    binding.viewmodel = viewModel
+                    mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
+                    listIssues.adapter = mAdapter
+                    if (viewModel.issues.value.isNullOrEmpty()) {
+                        textListEmpty.text = getString(R.string.no_problem)
+                    } else {
+                        textListEmpty.text = ""
+                    }
+                })
+            loader.hide()
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val navFrament = findNavController()
-
         buttonUp.setOnClickListener {
-            //todo scroll top
+            listIssues.smoothScrollToPosition(0)
         }
 
         loader.show()

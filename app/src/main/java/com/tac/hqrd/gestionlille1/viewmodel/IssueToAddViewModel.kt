@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.tac.hqrd.gestionlille1.db.IssueType
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 
-
+/**
+ * Viewmodel to keep the info from the add_fragment
+ */
 class IssueToAddViewModel : ViewModel() {
     val issue: MutableLiveData<Issue> = MutableLiveData()
 

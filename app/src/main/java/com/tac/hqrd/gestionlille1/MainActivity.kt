@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var navFrament: NavController
+    private lateinit var navFrament: NavController
     private lateinit var viewModel: ListIssuesViewModel
 
     companion object {

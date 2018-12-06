@@ -1,8 +1,7 @@
-package com.tac.hqrd.gestionlille1
+package com.tac.hqrd.gestionlille1.db
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.tac.hqrd.gestionlille1.db.IssuesDatabase
 import com.tac.hqrd.gestionlille1.db.dao.IssueDao
 import com.tac.hqrd.gestionlille1.db.entity.Issue
 import kotlinx.coroutines.GlobalScope
@@ -21,10 +20,6 @@ class IssueRepository(application: Application) {
 
     fun getAllIssues(): LiveData<List<Issue>> {
         return listLiveData
-    }
-
-    fun findById(uid: Long): LiveData<Issue> {
-        return issueDao.findById(uid)
     }
 
     fun insert(issue: Issue) {
