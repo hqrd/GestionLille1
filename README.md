@@ -33,10 +33,28 @@ Dans la toolbar, cliquer sur "Tout supprimer" pour supprimer complétement toute
 
 # Rapport technique
 Précision : ce projet utilise le nouveau système Navigation de Jetpack, pour pouvoir naviguer dans les resources navigation, il faut activer dans : Settings > Experimental > Navigation Editor<br/>
-Android Studio 3.2.1<br/>
+Android Studio 3.2.1 & plugin Kotlin 1.3.10<br/>
+
+
+## Architecture du projet
+
+Le projet contient 4 packages & 1 activity.
+- db : qui va contenir tout ce qui concerne la liaison à la base de données SQLite via Room et l'entité Issue
+- helper : qui va contenir des classes utiles et des fonctions statiques
+- ui : qui va contenir le comportement des vues
+- viewmodel : qui va contenir tout les viewmodels
 
 ## Jetpack
-(navigation, androidx, kotlin)
+J'ai essayé d'intégrer au maximum les dernières nouveautés d'android en matière de bonnes pratiques.
+Cela passe par l'utilisation du nouveau système de navigation (voir res/navigation).
+Le support des anciennes versions des API via androidx.
+La migration vers le langage Kotlin (Android KTX).
+Et d'autres notions, qui suivent..
+
 ## Databinding, Live Data, Room
+Le databinding va servir à simplifier le code et à déléguer l'affichage au maximum dans le xml.
+Le livedata va permettre de synchroniser nos données directement à la base de données.
+La base de données, justement, qui via un ORM simple, permet de créer des entités directement liés aux objets en BDD. Et qu'on va pouvoir simplement requêter avec les Dao.
 
 ## Viewmodel
+Les viewmodel, qui ont un cycle de vie qui simplifie le passage de données entre fragment, vont aussi permettre de lier les autres aspects de jetpack : on va pouvoir récupérer les données dans un viewmodel automatiquement connecté au reste.

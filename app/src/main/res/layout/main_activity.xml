@@ -9,7 +9,6 @@
     tools:context=".MainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/main.coordlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigationView"
@@ -29,7 +28,6 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
-            android:id="@+id/main.framelayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">

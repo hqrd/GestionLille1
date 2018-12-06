@@ -12,7 +12,6 @@
     <string name="add_task">Ajouter une tâche</string>
     <string name="add_fixtures">Ajouter données</string>
     <string name="delete_all">Tout supprimer</string>
-    <string name="location_required">Permission GPS requise</string>
     <string name="adding_fixtures">Ajout de 5 tâches.</string>
     <string name="deleting_tasks">Suppression des tâches.</string>
     <string name="no_adress_found">Impossible de trouver une adresse.</string>
@@ -29,7 +28,6 @@
         <item>Mauvaise herbe</item>
         <item>Autre</item>
     </string-array>
-    <string name="title_activity_maps">Map</string>
     <string name="viewOnGmap">Voir sur Maps</string>
     <string name="delete">Supprimer</string>
     <string name="deleting_task">Tâche supprimée</string>
