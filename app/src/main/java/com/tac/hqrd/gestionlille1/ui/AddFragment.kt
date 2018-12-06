@@ -128,11 +128,9 @@ class AddFragment : Fragment(), AdapterView.OnItemSelectedListener {
      * Updates the internal and displayed address
      */
     private fun updateAddress(around: Boolean = false) {
-        //todo pb de permission sur les anciennes versions api
+        buttonLoc.isEnabled = false
+        editTextAddress.isEnabled = false
         GlobalScope.launch {
-
-            buttonLoc.isEnabled = false
-            editTextAddress.isEnabled = false
             LocationHelper.getLastLoc(activity!!, around) { adresses ->
                 if (adresses != null) {
                     if (adresses.isEmpty()) {

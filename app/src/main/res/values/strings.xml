@@ -15,7 +15,7 @@
     <string name="location_required">Permission GPS requise</string>
     <string name="adding_fixtures">Ajout de 5 tâches.</string>
     <string name="deleting_tasks">Suppression des tâches.</string>
-    <string name="no_adress_found">Impossible de trouver l\'adresse</string>
+    <string name="no_adress_found">Impossible de trouver une adresse.</string>
     <string name="add_new_task">Ajouter une nouvelle tâche</string>
     <string name="location">location</string>
     <string name="description">Description</string>
