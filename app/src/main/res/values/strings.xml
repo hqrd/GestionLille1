@@ -32,4 +32,5 @@
     <string name="delete">Supprimer</string>
     <string name="deleting_task">Tâche supprimée</string>
     <string name="no_problem">Aucun problème ! :)</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDg74wM2x2MEU5qAO_qBLIz6r3-c3sTboU</string>
 </resources>
