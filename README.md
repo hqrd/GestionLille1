@@ -59,7 +59,7 @@ La base de données, justement, qui via un ORM simple, permet de créer des enti
 ## Viewmodel
 Les viewmodel, qui ont un cycle de vie qui simplifie le passage de données entre fragment, vont aussi permettre de lier les autres aspects de jetpack : on va pouvoir récupérer les données dans un viewmodel automatiquement connecté au reste.<br/>
 
-### Référence :
+#### Références :
 
 Hello jetpack : https://developer.android.com/jetpack/docs/getting-started <br/>
 https://developer.android.com/jetpack/arch/ <br/>
