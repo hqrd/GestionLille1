@@ -45,16 +45,36 @@ Le projet contient 4 packages & 1 activity.
 - viewmodel : qui va contenir tout les viewmodels
 
 ## Jetpack
-J'ai essayé d'intégrer au maximum les dernières nouveautés d'android en matière de bonnes pratiques.
-Cela passe par l'utilisation du nouveau système de navigation (voir res/navigation).
-Le support des anciennes versions des API via androidx.
-La migration vers le langage Kotlin (Android KTX).
-Et d'autres notions, qui suivent..
+J'ai essayé d'intégrer au maximum les dernières nouveautés d'android en matière de bonnes pratiques.<br/>
+Cela passe par l'utilisation du nouveau système de navigation (voir res/navigation).<br/>
+Le support des anciennes versions des API via androidx.<br/>
+La migration vers le langage Kotlin (Android KTX).<br/>
+Et d'autres notions, qui suivent..<br/>
 
 ## Databinding, Live Data, Room
-Le databinding va servir à simplifier le code et à déléguer l'affichage au maximum dans le xml.
-Le livedata va permettre de synchroniser nos données directement à la base de données.
-La base de données, justement, qui via un ORM simple, permet de créer des entités directement liés aux objets en BDD. Et qu'on va pouvoir simplement requêter avec les Dao.
+Le databinding va servir à simplifier le code et à déléguer l'affichage au maximum dans le xml.<br/>
+Le livedata va permettre de synchroniser nos données directement à la base de données.<br/>
+La base de données, justement, qui via un ORM simple, permet de créer des entités directement liés aux objets en BDD. Et qu'on va pouvoir simplement requêter avec les Dao.<br/>
 
 ## Viewmodel
-Les viewmodel, qui ont un cycle de vie qui simplifie le passage de données entre fragment, vont aussi permettre de lier les autres aspects de jetpack : on va pouvoir récupérer les données dans un viewmodel automatiquement connecté au reste.
+Les viewmodel, qui ont un cycle de vie qui simplifie le passage de données entre fragment, vont aussi permettre de lier les autres aspects de jetpack : on va pouvoir récupérer les données dans un viewmodel automatiquement connecté au reste.<br/>
+
+### Référence :
+
+Hello jetpack : https://developer.android.com/jetpack/docs/getting-started <br/>
+https://developer.android.com/jetpack/arch/ <br/>
+
+Kotlin : https://kotlinlang.org/docs/reference/idioms.html <br/>
+Keddit : https://android.jlelse.eu/learn-kotlin-while-developing-an-android-app-part-2-e53317ffcbe9 <br/>
+
+Navigation : https://developer.android.com/topic/libraries/architecture/navigation/navigation-implementing <br/>
+Viewmodel : https://developer.android.com/topic/libraries/architecture/viewmodel <br/>
+DataBinding : https://developer.android.com/topic/libraries/data-binding/ <br/>
+BDD : https://developer.android.com/topic/libraries/architecture/room <br/>
+Adapter list :https://developer.android.com/guide/topics/ui/declaring-layout#kotlin <br/>
+Location : https://developer.android.com/guide/topics/location/strategies <br/>
+Permissions : https://developer.android.com/guide/topics/permissions/overview <br/>
+
+https://developer.android.com/kotlin/ktx <br/>
+
+Play Store : https://support.google.com/googleplay/android-developer/answer/7384423 <br/>
