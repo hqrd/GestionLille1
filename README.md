@@ -23,8 +23,8 @@ Cliquer sur "Voir les tâches" ou sur la loupe en bas de l'écran.
 
 Il suffit de cliquer sur une des tâches de la liste.
 
-- Afficher l'adresse sur une carte :
-- Supprimer la tâche :
+- Afficher l'adresse sur une carte : cliquer sur voir sur Maps
+- Supprimer la tâche : cliquer sur Supprimer
 
 ## Vider la base de données
 
