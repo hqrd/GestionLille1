@@ -45,7 +45,7 @@ Le projet contient 4 packages & 1 activity.
 - viewmodel : qui va contenir tout les viewmodels
 
 ## Jetpack
-J'ai essayé d'intégrer au maximum les dernières nouveautés d'android en matière de bonnes pratiques.<br/>
+Je n'avais pas de connaissances en Kotlin avant ce projet mais j'ai essayé d'intégrer au maximum les dernières nouveautés d'android en matière de bonnes pratiques.<br/>
 Cela passe par l'utilisation du nouveau système de navigation (voir res/navigation).<br/>
 Le support des anciennes versions des API via androidx.<br/>
 La migration vers le langage Kotlin (Android KTX).<br/>
@@ -58,6 +58,15 @@ La base de données, justement, qui via un ORM simple, permet de créer des enti
 
 ## Viewmodel
 Les viewmodel, qui ont un cycle de vie qui simplifie le passage de données entre fragment, vont aussi permettre de lier les autres aspects de jetpack : on va pouvoir récupérer les données dans un viewmodel automatiquement connecté au reste.<br/>
+Je n'ai pas déléguer la plupart des fonctions d'affichages aux viewmodel cependant.<br/>
+
+## UI
+J'ai mis en place dans l'activité principale, un AppBarLayout qui permet d'avoir une Toolbar qui va disparaître lorsque l'on va scroll dans les fragment scrollables (cf stopScroll et startScroll de ScrollFragmentHelper).<br/>
+J'ai également mis en place une BottomNavigationView qui est directement liée à l'outil de navigation de Jetpack pour naviguer entre les 3 fragments principaux (il suffit de mettre le fragment comme id dans les items du menu correspondant).<br/>
+
+## Géoloc
+J'ai mis en place un helper qui va récupérer en tâche de fond (grâce aux coroutines Kotlin), les coordonnées GPS du téléphone. J'ai mis un listener pendant 1 seconde qui va récupérer les coordonnées.<br/>
+Puis grâce à Geocoder on pourra récupérer les addresses directement et les renvoyer dans les fragment avec un callback.
 
 #### Références :
 

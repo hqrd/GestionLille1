@@ -1,17 +1,23 @@
 package com.tac.hqrd.gestionlille1
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.tac.hqrd.gestionlille1.viewmodel.ListIssuesViewModel
+import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -73,4 +79,45 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(b)
     }
 
+    /**
+     * We check the permissiosn on start
+     */
+    override fun onStart() {
+        super.onStart()
+        if (!isPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION) || !isPermissionGranted(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1
+            )
+        }
+    }
+
+    private fun isPermissionGranted(permission: String) =
+        (ContextCompat.checkSelfPermission(this, permission)
+                == PackageManager.PERMISSION_GRANTED)
+
+    /**
+     * We loop on the permission request
+     */
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            1 -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    //permissions OK
+                } else {
+                    Snackbar.make(
+                        main_coordlayout, resources.getText(R.string.loc_required), Snackbar.LENGTH_LONG
+                    ).show()
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                        1
+                    )
+                }
+                return
+            }
+        }
+    }
 }

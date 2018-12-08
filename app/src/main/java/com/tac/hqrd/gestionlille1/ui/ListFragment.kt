@@ -64,15 +64,17 @@ class ListFragment : Fragment(), OnMapReadyCallback {
         binding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
         val view = binding.root
 
+        binding.loader.show()
+        mAdapter = IssueListAdapter(emptyList(), mLat, mLong, this)
+        binding.listIssues.adapter = mAdapter
+
         val self = this
         GlobalScope.launch {
             LocationHelper.getLastLoc(activity!!, false) { adresses ->
                 getView()?.let {
                     //to make sure we're on the page
                     displayIssues(adresses, self)
-
                 }
-
             }
         }
 
@@ -95,7 +97,7 @@ class ListFragment : Fragment(), OnMapReadyCallback {
             }
 
             viewModel.issues.observe(viewLifecycleOwner,
-                Observer<List<Any>> { _ ->
+                Observer<List<Any>> {
                     viewModel.updateNumberIssues()
                     binding.viewmodel = viewModel
                     mAdapter = IssueListAdapter(viewModel.issues.value!!, mLat, mLong, self)
@@ -117,7 +119,6 @@ class ListFragment : Fragment(), OnMapReadyCallback {
             listIssues.smoothScrollToPosition(0)
         }
 
-        loader.show()
     }
 
     override fun onLowMemory() {
